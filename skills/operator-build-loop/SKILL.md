@@ -71,6 +71,18 @@ When the executor hands back its plan, the PM checks four things, fast:
 
 If all four pass, green-light it. If not, name the gap and send it back. Be specific about what to fix.
 
+## The handoff protocol (how the human and the agents take turns)
+
+The operator is the relay. They carry plans and approvals between two agents that cannot see each other, and they are the only one who can take certain actions at all — a commit to a public repo, a password, a payment method, a verification code emailed to them. That relay only works if the turns are clean.
+
+**Pause, hand off, wait.** When you reach something only the human can do, stop completely. Say what is done, what is staged, and the single thing to click. Then wait for their reply before touching anything again.
+
+**Do not keep working the same surface while you wait.** If you are both driving the same browser tab, the same terminal, or the same working tree, your next action lands on top of theirs and neither of you can tell whose state you are looking at. This produces the worst class of bug in the whole model: not a broken build, but a broken *understanding* of what happened. Silence is not permission to resume.
+
+**Hand the operator one block, not a paragraph.** Anything destined for the coding agent goes in a single copy-paste block, delivered first. Commentary goes below it, short. The operator skims and carries; anything they have to reassemble from prose is friction, and friction in a relay is where mistakes enter.
+
+A clean handoff has four parts: what is done, what is staged, the one command to fire, and an explicit "reply when done." Then nothing until they reply.
+
 ## Guardrails (the principles underneath the loop)
 
 - **One cook at a time.** Do not run two builds in parallel, especially when tired or unwell. Split attention is how live systems get broken. Finish or park one before starting the next.
