@@ -83,6 +83,24 @@ The operator is the relay. They carry plans and approvals between two agents tha
 
 A clean handoff has four parts: what is done, what is staged, the one command to fire, and an explicit "reply when done." Then nothing until they reply.
 
+## Working memory (why the markdown files are load-bearing)
+
+Agents forget. A chat compacts, a window dies, a terminal freezes — and everything that existed only in that transcript is gone, including the plan you already approved. In this model the durable memory is a small set of markdown files, and keeping them true is the PM's job, not housekeeping.
+
+**Update the trackers every session, before the window closes.** If a finding exists only in a transcript, it does not exist. The test is simple: if this window died right now, could a cold agent pick the work up from the files alone? If not, you have not finished the session.
+
+**Start a fresh session after every compaction.** A compacted window has already dropped detail, and it cannot tell you what it dropped — it will answer confidently from a summary of a summary. Close it and open a new one that reads the trackers. This is also why the trackers have to be current: the new window's entire inheritance is those files.
+
+**Keep them trim.** Working-memory files rot in two directions: they grow until nobody reads them, and they drift until they lie. Both are fatal, and the second is worse because it is invisible. Three files carry the load:
+
+- **Project context** — architecture, conventions, canon, the things that stay true for months.
+- **Current work** — this week's tasks, plus a dated session-state block appended at the end of each session. The most recent block is the truth; older ones are history.
+- **The ledger** — everything found mid-build that was out of scope to fix. Nothing gets lost, nothing gets fixed by drive-by.
+
+Archive closed weeks out of the working file. Condense rather than append forever. A file nobody reads protects nobody.
+
+**Trust the code over the docs.** Project-context files drift by default — they describe what was true when someone last wrote them down, and the running app moved on. Read the git log and the live code first; treat the doc as a starting point, and fix it in the same session you catch it lying.
+
 ## Guardrails (the principles underneath the loop)
 
 - **One cook at a time.** Do not run two builds in parallel, especially when tired or unwell. Split attention is how live systems get broken. Finish or park one before starting the next.
